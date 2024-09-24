@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: ms-payments
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/auth/realms/myrealm
+
+  datasource:
+    username: payments
+    password: payments123
+    url: jdbc:postgresql://postgres-payments:5432/payments

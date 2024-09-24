@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Israfil Iskandarov
+      changes:
+        - insert:
+            tableName: customers
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: John
+              - column:
+                  name: surname
+                  value: Doe
+              - column:
+                  name: birth_date
+                  valueDate: 1990-01-01
+              - column:
+                  name: gsm_number
+                  value: +994516087909
+              - column:
+                  name: balance
+                  valueNumeric: 100.00

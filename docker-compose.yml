@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.3
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: ["start-dev"]
+    ports:
+      - "8080:8080"
+
+  postgres-account:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: account
+      POSTGRES_USER: account
+      POSTGRES_PASSWORD: account123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-account-data:/var/lib/postgresql/data
+
+  postgres-payments:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: payments
+      POSTGRES_USER: payments
+      POSTGRES_PASSWORD: payments123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-payments-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8085:80"
+    depends_on:
+      - postgres-account
+      - postgres-payments
+
+
+  gateway:
+    build:
+      context: ./gateway
+    environment:
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_REALM=payment-system
+      - KEYCLOAK_RESOURCE=gateway-client
+    ports:
+      - "8081:8081"
+    depends_on:
+      - keycloak
+
+  ms-payments:
+    build:
+      context: ./mspayments
+    environment:
+      - DATABASE_HOST=postgres-payments
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_REALM=payment-system
+      - KEYCLOAK_RESOURCE=ms-payments-client
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres-payments
+
+  ms-account:
+    build:
+      context: ./msaccount
+    environment:
+      - DATABASE_HOST=postgres-account
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres-account
+
+volumes:
+  postgres-account-data:
+  postgres-payments-data:

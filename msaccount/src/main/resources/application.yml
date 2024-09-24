@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ms-account
+
+  datasource:
+    username: account
+    password: account123
+    url: jdbc:postgresql://postgres-account:5432/account
