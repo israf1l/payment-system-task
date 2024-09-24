@@ -1,22 +1,14 @@
-## Payment System Task
+## Payment System
 
 ![image](https://github.com/user-attachments/assets/dfa8fc51-e65b-4d51-ba0d-9f5f3290ca4c)
 
 
 ## About The Project
+"Payment System" is a small project to simulate the process of 
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-- [Next](https://nextjs.org)
-- [React](https://reactjs.org)
-- [Vue](https://vuejs.org)
-- [Angular](https://angular.io)
-- [Svelte](https://svelte.dev)
-- [Laravel](https://laravel.com)
-- [Bootstrap](https://getbootstrap.com)
-- [JQuery](https://jquery.com)
+This 
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
