@@ -1,8 +1,4 @@
-
-<br/>
-<div align="center">
-<h3 align="center">Payment System Task</h3>
-<p align="center">
+## Payment System Task
 
 ## About The Project
 
