@@ -3,6 +3,7 @@ package az.akart.mspayments.controller;
 import az.akart.mspayments.model.request.PaymentRequest;
 import az.akart.mspayments.model.request.ReverseRequest;
 import az.akart.mspayments.model.response.PaymentResponse;
+import az.akart.mspayments.model.response.ReverseResponse;
 import az.akart.mspayments.service.PaymentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class PaymentController {
   }
 
   @PostMapping("/reverse")
-  public void reverse(@RequestBody ReverseRequest request) {
+  public ReverseResponse reverse(@RequestBody ReverseRequest request) {
     return paymentsService.reverse(request);
   }
   
