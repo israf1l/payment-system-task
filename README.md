@@ -1,7 +1,6 @@
 ## Payment System
 
-![image](https://github.com/user-attachments/assets/dfa8fc51-e65b-4d51-ba0d-9f5f3290ca4c)
-
+![image](https://github.com/user-attachments/assets/2add33a3-41cc-4b98-bd01-b3f6dca8054f)
 
 ## About The Project
 "Payment System" is a small project to simulate the process of 
