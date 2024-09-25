@@ -48,3 +48,5 @@ To run the project, you need to have the following installed:
   docker-compose up --build
   ```    
 ### Postman Collection
+
+[Payment system task.postman_collection.json](https://github.com/israf1l/payment-system-task/blob/main/Payment%20system%20task.postman_collection.json)
