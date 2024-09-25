@@ -47,3 +47,4 @@ To run the project, you need to have the following installed:
   ```sh
   docker-compose up --build
   ```    
+### Postman Collection
