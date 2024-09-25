@@ -34,18 +34,15 @@ Docker (to run services in containers)
 ### Installation
 
 1. Clone the Repository
-- npm
   ```sh
   git clone https://github.com/israf1l/payment-system-task.git
   cd payment-system-task
   ```
 2. Clone the Repository
-- npm
   ```sh
   ./gradlew clean build
   ```
 3. Clone the Repository
-- npm
   ```sh
   docker-compose up --build
   ```    
