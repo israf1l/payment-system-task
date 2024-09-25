@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "4cee0a9f-1b10-428b-8b05-87772c1eaf9e",
+		"name": "Payment system task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22987864"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"user\",\n    \"password\" : \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "debit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk0NTA0MDc0OTk1IiwiYXVkX3R5cGUiOiJVU0VSIiwidHlwZSI6IkFDQ0VTUyIsImlkIjoyNTI4MTMzLCJndWlkIjoiNzYwNkY4OTk3RkU3NDk4NEE2MDUzQTdCODcyNDc5OTciLCJjbXNfaWQiOjQ0OTgyODUsImNpZiI6IjAyOTk2NDIiLCJjbXNfaWRzIjpbNDQ5ODI4NV0sImRyZCI6IjIwMjQtMDMtMDRUMTc6NTM6MTYuMzA2MzI1KzA0OjAwIiwicmVnaXN0cmF0aW9uX3R5cGUiOiJDQVJEIiwiaWF0IjoxNzI3MDY5NTY0LCJleHAiOjE3MjcwNzA0NjR9.8L8hkWvQyHbHH3fY_uaYLxqSwrCPNRCCINJOIrFw83qv4Q5t-W3pYkrgtSpgntM1RY76TySFO-sLOMHvVmgR-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\" : 2,\n    \"amount\" : 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/payments/debit",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"payments",
+						"debit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "credit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk0NTA0MDc0OTk1IiwiYXVkX3R5cGUiOiJVU0VSIiwidHlwZSI6IkFDQ0VTUyIsImlkIjoyNTI4MTMzLCJndWlkIjoiNzYwNkY4OTk3RkU3NDk4NEE2MDUzQTdCODcyNDc5OTciLCJjbXNfaWQiOjQ0OTgyODUsImNpZiI6IjAyOTk2NDIiLCJjbXNfaWRzIjpbNDQ5ODI4NV0sImRyZCI6IjIwMjQtMDMtMDRUMTc6NTM6MTYuMzA2MzI1KzA0OjAwIiwicmVnaXN0cmF0aW9uX3R5cGUiOiJDQVJEIiwiaWF0IjoxNzI3MDY5NTY0LCJleHAiOjE3MjcwNzA0NjR9.8L8hkWvQyHbHH3fY_uaYLxqSwrCPNRCCINJOIrFw83qv4Q5t-W3pYkrgtSpgntM1RY76TySFO-sLOMHvVmgR-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\" : 1,\n    \"amount\" : 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/payments/credit",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"payments",
+						"credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reverse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk0NTA0MDc0OTk1IiwiYXVkX3R5cGUiOiJVU0VSIiwidHlwZSI6IkFDQ0VTUyIsImlkIjoyNTI4MTMzLCJndWlkIjoiNzYwNkY4OTk3RkU3NDk4NEE2MDUzQTdCODcyNDc5OTciLCJjbXNfaWQiOjQ0OTgyODUsImNpZiI6IjAyOTk2NDIiLCJjbXNfaWRzIjpbNDQ5ODI4NV0sImRyZCI6IjIwMjQtMDMtMDRUMTc6NTM6MTYuMzA2MzI1KzA0OjAwIiwicmVnaXN0cmF0aW9uX3R5cGUiOiJDQVJEIiwiaWF0IjoxNzI3MDY5NTY0LCJleHAiOjE3MjcwNzA0NjR9.8L8hkWvQyHbHH3fY_uaYLxqSwrCPNRCCINJOIrFw83qv4Q5t-W3pYkrgtSpgntM1RY76TySFO-sLOMHvVmgR-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transactionId\" : 1,\n    \"amount\" : 90\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/payments/reverse",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"payments",
+						"reverse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
