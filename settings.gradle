@@ -1,0 +1,6 @@
+rootProject.name = 'payment-system-task'
+
+include 'auth-simulation'
+include 'gateway'
+include 'ms-account'
+include 'ms-payments'

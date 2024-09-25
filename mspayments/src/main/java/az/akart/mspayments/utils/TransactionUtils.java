@@ -4,14 +4,14 @@ import az.akart.mspayments.dao.entity.ReverseTransaction;
 import az.akart.mspayments.dao.entity.Transaction;
 import az.akart.mspayments.error.exceptions.ReversalAmountExceedsException;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TransactionUtils {
 
-  public BigDecimal calculateRemainingAmount(Transaction transaction) {
-    BigDecimal totalReversedAmount = transaction.getReverseTransactions()
-        .stream()
+  public BigDecimal calculateRemainingAmount(Transaction transaction, List<ReverseTransaction> reverseTransactions) {
+    BigDecimal totalReversedAmount = reverseTransactions.stream()
         .map(ReverseTransaction::getAmount)
         .reduce(BigDecimal.ZERO, BigDecimal::add);
 
@@ -27,6 +27,5 @@ public class TransactionUtils {
 
     return amountToReverse;
   }
-
 
 }

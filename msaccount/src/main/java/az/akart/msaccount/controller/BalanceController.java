@@ -1,5 +1,6 @@
 package az.akart.msaccount.controller;
 
+import az.akart.msaccount.model.AccountResponse;
 import az.akart.msaccount.model.request.BalanceRequest;
 import az.akart.msaccount.service.BalanceService;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +17,13 @@ public class BalanceController {
   private final BalanceService balanceService;
 
   @PostMapping("/debit")
-  public void debit(@RequestBody BalanceRequest request) {
-    balanceService.debit(request);
+  public AccountResponse debit(@RequestBody BalanceRequest request) {
+    return balanceService.debit(request);
   }
 
   @PostMapping("/credit")
-  public void credit(@RequestBody BalanceRequest request) {
-    balanceService.credit(request);
+  public AccountResponse credit(@RequestBody BalanceRequest request) {
+    return balanceService.credit(request);
   }
 
 }

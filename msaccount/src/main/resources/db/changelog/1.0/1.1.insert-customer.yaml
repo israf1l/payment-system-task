@@ -11,10 +11,10 @@ databaseChangeLog:
                   value: 1
               - column:
                   name: name
-                  value: John
+                  value: Israfil
               - column:
                   name: surname
-                  value: Doe
+                  value: Iskandarov
               - column:
                   name: birth_date
                   valueDate: 1997-07-22

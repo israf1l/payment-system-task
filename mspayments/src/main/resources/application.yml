@@ -9,4 +9,4 @@ spring:
 
 client:
   account:
-    url: http://localhost:8083
+    url: http://ms-account:8080

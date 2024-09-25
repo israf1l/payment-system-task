@@ -4,6 +4,8 @@ import az.akart.msaccount.dao.entity.Customer;
 import az.akart.msaccount.dao.repository.CustomerRepository;
 import az.akart.msaccount.error.exceptions.CustomerNotFoundException;
 import az.akart.msaccount.error.exceptions.InsufficientBalanceException;
+import az.akart.msaccount.model.AccountResponse;
+import az.akart.msaccount.model.enums.Status;
 import az.akart.msaccount.model.request.BalanceRequest;
 import az.akart.msaccount.service.BalanceService;
 import jakarta.transaction.Transactional;
@@ -21,7 +23,7 @@ public class BalanceServiceImpl implements BalanceService {
 
   @Override
   @Transactional
-  public void debit(BalanceRequest request) {
+  public AccountResponse debit(BalanceRequest request) {
     Customer customer = customerRepository.findByIdWithLock(request.customerId())
         .orElseThrow(() -> new CustomerNotFoundException(request.customerId()));
 
@@ -32,12 +34,17 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     customer.setBalance(newBalance);
+
     log.info("Debited {} to customer {}. New balance: {}", request.amount(), customer.getId(), newBalance);
+
+    return AccountResponse.builder()
+        .status(Status.SUCCESS)
+        .build();
   }
 
   @Override
   @Transactional
-  public void credit(BalanceRequest request) {
+  public AccountResponse credit(BalanceRequest request) {
     Customer customer = customerRepository.findByIdWithLock(request.customerId())
         .orElseThrow(() -> new CustomerNotFoundException(request.customerId()));
 
@@ -45,6 +52,10 @@ public class BalanceServiceImpl implements BalanceService {
     customer.setBalance(newBalance);
 
     log.info("Credited {} to customer {}. New balance: {}", request.amount(), customer.getId(), newBalance);
+
+    return AccountResponse.builder()
+        .status(Status.SUCCESS)
+        .build();
   }
 
 }

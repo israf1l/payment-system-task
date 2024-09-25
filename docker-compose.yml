@@ -19,17 +19,6 @@ services:
     ports:
       - "5433:5432"
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8085:80"
-    depends_on:
-      - postgres-account
-      - postgres-payments
-
   auth-simulation:
     build:
       context: ./auth-simulation
@@ -39,10 +28,6 @@ services:
   gateway:
     build:
       context: ./gateway
-    environment:
-      - KEYCLOAK_AUTH_SERVER_URL=http://localhost:8080/auth
-      - KEYCLOAK_REALM=payment-system
-      - KEYCLOAK_RESOURCE=gateway-client
     ports:
       - "8081:8080"
 
@@ -51,9 +36,6 @@ services:
       context: ./mspayments
     environment:
       - DATABASE_HOST=postgres-payments
-      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
-      - KEYCLOAK_REALM=payment-system
-      - KEYCLOAK_RESOURCE=ms-payments-client
     ports:
       - "8082:8080"
     depends_on:

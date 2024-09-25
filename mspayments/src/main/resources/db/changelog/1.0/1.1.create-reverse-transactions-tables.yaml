@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: Israfil Iskandarov
       changes:
         - createTable:
-            tableName: transactions
+            tableName: reverse_transactions
             columns:
               - column:
                   name: id
@@ -15,38 +15,19 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: customer_id
-                  type: BIGINT
-                  constraints:
-                    nullable: false
-
-              - column:
                   name: amount
                   type: DECIMAL(19, 4)
                   constraints:
                     nullable: false
 
               - column:
-                  name: direction
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: status
-                  type: VARCHAR(255)
+                  name: transaction_id
+                  type: BIGINT
                   constraints:
                     nullable: false
 
               - column:
                   name: created_at
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: updated_at
                   type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:

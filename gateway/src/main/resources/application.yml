@@ -11,7 +11,7 @@ spring:
             - Path=/auth/**
 
         - id: payment-service
-          uri: http://ms-payments:8082
+          uri: http://ms-payments:8080
           predicates:
             - Path=/payments/**
           filters:

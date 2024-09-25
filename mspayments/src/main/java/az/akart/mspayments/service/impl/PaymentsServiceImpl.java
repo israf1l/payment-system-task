@@ -8,6 +8,7 @@ import az.akart.mspayments.client.AccountClient;
 import az.akart.mspayments.client.model.response.AccountResponse;
 import az.akart.mspayments.dao.entity.Transaction;
 import az.akart.mspayments.error.exceptions.FailedOperationException;
+import az.akart.mspayments.model.dto.ReverseDto;
 import az.akart.mspayments.model.request.PaymentRequest;
 import az.akart.mspayments.model.request.ReverseRequest;
 import az.akart.mspayments.model.response.PaymentResponse;
@@ -34,6 +35,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 
       return PaymentResponse.builder()
           .transactionId(transaction.getId())
+          .status(SUCCESS)
           .build();
     }
     throw new FailedOperationException();
@@ -48,6 +50,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 
       return PaymentResponse.builder()
           .transactionId(transaction.getId())
+          .status(SUCCESS)
           .build();
     }
     throw new FailedOperationException();
@@ -56,16 +59,18 @@ public class PaymentsServiceImpl implements PaymentsService {
   @Override
   @Transactional
   public ReverseResponse reverse(ReverseRequest request) {
-    Transaction transaction = transactionService.reverseTransaction(request);
+    ReverseDto reverseDto = transactionService.reverseTransaction(request);
 
     AccountResponse accountResponse = accountClient.credit(PaymentRequest.builder()
-            .customerId(transaction.getCustomerId())
-            .amount(request.amount() != null ? request.amount() : transaction.getAmount())
+        .customerId(reverseDto.transaction().getCustomerId())
+        .amount(request.amount() != null ? request.amount() : reverseDto.transaction().getAmount())
         .build());
 
     if (accountResponse.status() == SUCCESS) {
       return ReverseResponse.builder()
-          .transactionId(transaction.getId())
+          .transactionId(reverseDto.transaction().getId())
+          .reverseId(reverseDto.reverseTransaction().getId())
+          .status(SUCCESS)
           .build();
     }
     throw new FailedOperationException();
