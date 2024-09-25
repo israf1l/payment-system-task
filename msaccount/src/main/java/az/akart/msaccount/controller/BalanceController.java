@@ -1,9 +1,10 @@
 package az.akart.msaccount.controller;
 
+import az.akart.msaccount.model.request.BalanceRequest;
 import az.akart.msaccount.service.BalanceService;
-import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +16,13 @@ public class BalanceController {
   private final BalanceService balanceService;
 
   @PostMapping("/debit")
-  public void debit() {
-    balanceService.debit(1L, new BigDecimal(100));
+  public void debit(@RequestBody BalanceRequest request) {
+    balanceService.debit(request);
+  }
+
+  @PostMapping("/credit")
+  public void credit(@RequestBody BalanceRequest request) {
+    balanceService.credit(request);
   }
 
 }

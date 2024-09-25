@@ -1,18 +1,25 @@
-
 spring:
   application:
     name: gateway
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/auth/realms/payment-system
-
   cloud:
     gateway:
       routes:
+        - id: auth
+          uri: http://auth-simulation:8080
+          predicates:
+            - Path=/auth/**
+
         - id: payment-service
-          uri: http://localhost:8082
+          uri: http://ms-payments:8082
           predicates:
             - Path=/payments/**
+          filters:
+            - AuthFilter
+
+auth:
+  uri: http://auth-simulation:8080
+
+logging:
+  level:
+    root: debug

@@ -1,11 +1,16 @@
 package az.akart.mspayments.service;
 
-import java.math.BigDecimal;
+import az.akart.mspayments.model.request.PaymentRequest;
+import az.akart.mspayments.model.request.ReverseRequest;
+import az.akart.mspayments.model.response.PaymentResponse;
+import az.akart.mspayments.model.response.ReverseResponse;
 
 public interface PaymentsService {
 
-  void topUp(Long customerId, BigDecimal amount);
+  PaymentResponse debit(PaymentRequest request);
 
-  void credit(Long customerId, BigDecimal amount);
+  PaymentResponse credit(PaymentRequest request);
+
+  ReverseResponse reverse(ReverseRequest request);
 
 }

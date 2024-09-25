@@ -17,7 +17,7 @@ databaseChangeLog:
                   value: Doe
               - column:
                   name: birth_date
-                  valueDate: 1990-01-01
+                  valueDate: 1997-07-22
               - column:
                   name: gsm_number
                   value: +994516087909

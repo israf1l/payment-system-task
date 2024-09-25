@@ -1,11 +1,11 @@
 package az.akart.msaccount.service;
 
-import java.math.BigDecimal;
+import az.akart.msaccount.model.request.BalanceRequest;
 
 public interface BalanceService {
 
-  void debit(Long customerId, BigDecimal amount);
+  void debit(BalanceRequest request);
 
-  void credit(Long customerId, BigDecimal amount);
+  void credit(BalanceRequest request);
 
 }

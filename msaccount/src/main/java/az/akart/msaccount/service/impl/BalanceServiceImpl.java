@@ -2,12 +2,17 @@ package az.akart.msaccount.service.impl;
 
 import az.akart.msaccount.dao.entity.Customer;
 import az.akart.msaccount.dao.repository.CustomerRepository;
+import az.akart.msaccount.error.exceptions.CustomerNotFoundException;
+import az.akart.msaccount.error.exceptions.InsufficientBalanceException;
+import az.akart.msaccount.model.request.BalanceRequest;
 import az.akart.msaccount.service.BalanceService;
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BalanceServiceImpl implements BalanceService {
@@ -15,27 +20,31 @@ public class BalanceServiceImpl implements BalanceService {
   private final CustomerRepository customerRepository;
 
   @Override
-  public void debit(Long customerId, BigDecimal amount) {
-    Optional<Customer> optionCustomer = customerRepository.findById(customerId);
+  @Transactional
+  public void debit(BalanceRequest request) {
+    Customer customer = customerRepository.findByIdWithLock(request.customerId())
+        .orElseThrow(() -> new CustomerNotFoundException(request.customerId()));
 
-    if (optionCustomer.isEmpty()) {
-      return;
+    BigDecimal newBalance = customer.getBalance().subtract(request.amount());
+
+    if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
+      throw new InsufficientBalanceException(request.customerId());
     }
 
-    Customer customer = optionCustomer.get();
-    customer.setBalance(customer.getBalance().add(amount));
-    customerRepository.save(customer);
+    customer.setBalance(newBalance);
+    log.info("Debited {} to customer {}. New balance: {}", request.amount(), customer.getId(), newBalance);
   }
 
   @Override
-  public void credit(Long customerId, BigDecimal amount) {
-    Optional<Customer> optionCustomer = customerRepository.findById(customerId);
-    if (optionCustomer.isEmpty()) {
-      return;
-    }
-    Customer customer = optionCustomer.get();
-    customer.setBalance(customer.getBalance().subtract(amount));
-    customerRepository.save(customer);
+  @Transactional
+  public void credit(BalanceRequest request) {
+    Customer customer = customerRepository.findByIdWithLock(request.customerId())
+        .orElseThrow(() -> new CustomerNotFoundException(request.customerId()));
+
+    BigDecimal newBalance = customer.getBalance().add(request.amount());
+    customer.setBalance(newBalance);
+
+    log.info("Credited {} to customer {}. New balance: {}", request.amount(), customer.getId(), newBalance);
   }
 
 }

@@ -1,13 +1,5 @@
 version: '3.8'
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:20.0.3
-    environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-    command: ["start-dev"]
-    ports:
-      - "8080:8080"
 
   postgres-account:
     image: postgres:14
@@ -17,8 +9,6 @@ services:
       POSTGRES_PASSWORD: account123
     ports:
       - "5432:5432"
-    volumes:
-      - postgres-account-data:/var/lib/postgresql/data
 
   postgres-payments:
     image: postgres:14
@@ -28,8 +18,6 @@ services:
       POSTGRES_PASSWORD: payments123
     ports:
       - "5433:5432"
-    volumes:
-      - postgres-payments-data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -42,18 +30,21 @@ services:
       - postgres-account
       - postgres-payments
 
+  auth-simulation:
+    build:
+      context: ./auth-simulation
+    ports:
+      - "8090:8080"
 
   gateway:
     build:
       context: ./gateway
     environment:
-      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_AUTH_SERVER_URL=http://localhost:8080/auth
       - KEYCLOAK_REALM=payment-system
       - KEYCLOAK_RESOURCE=gateway-client
     ports:
-      - "8081:8081"
-    depends_on:
-      - keycloak
+      - "8081:8080"
 
   ms-payments:
     build:
@@ -64,7 +55,7 @@ services:
       - KEYCLOAK_REALM=payment-system
       - KEYCLOAK_RESOURCE=ms-payments-client
     ports:
-      - "8082:8082"
+      - "8082:8080"
     depends_on:
       - postgres-payments
 
@@ -74,10 +65,6 @@ services:
     environment:
       - DATABASE_HOST=postgres-account
     ports:
-      - "8083:8083"
+      - "8083:8080"
     depends_on:
       - postgres-account
-
-volumes:
-  postgres-account-data:
-  postgres-payments-data:
