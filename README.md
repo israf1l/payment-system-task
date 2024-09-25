@@ -16,20 +16,21 @@ The system is composed of the following microservices:
 
 ## Built with
 
-Java 21
-Spring Boot 3.3.4
-Spring Cloud OpenFeign
-Spring Data JPA
-PostgreSQL
-Liquibase
-Docker
-Gradle
+- Java 21
+- Spring Boot 3.3.4
+- Spring Cloud Gateway
+- Spring Cloud Openfeign
+- Spring Data JPA
+- PostgreSQL
+- Liquibase
+- Docker
+- Gradle
 
 ### Getting started
 To run the project, you need to have the following installed:
 
-JDK 21
-Docker (to run services in containers)
+- JDK 21
+- Docker (to run services in containers)
 
 ### Installation
 
