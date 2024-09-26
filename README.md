@@ -1,7 +1,7 @@
 ## Payment System
 
 ## About The Project
-The Payment System Task is a microservice-based project that simulates a typical payment processing system. The project demonstrates a distributed architecture with microservices for handling account management, payments, and gateway authentication. Each service is designed to handle specific responsibilities, using Spring Boot and various technologies like OpenFeign, PostgreSQL, and Docker.
+The Payment System Task is a microservice-based project that simulates a typical payment processing system. The project demonstrates a distributed architecture with microservices for handling account balance management, payments, and gateway authentication. Each service is designed to handle specific responsibilities, using Spring Boot and various technologies like OpenFeign, PostgreSQL, and Docker.
 
 ### Architecture
 
