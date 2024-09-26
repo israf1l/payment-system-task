@@ -24,6 +24,7 @@ The system is composed of the following microservices:
 - PostgreSQL
 - Liquibase
 - Docker
+- Docker Compose
 - Gradle
 
 ### Getting started
