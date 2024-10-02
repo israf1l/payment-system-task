@@ -40,11 +40,11 @@ To run the project, you need to have the following installed:
   git clone https://github.com/israf1l/payment-system-task.git
   cd payment-system-task
   ```
-2. Clone the Repository
+2. Build
   ```sh
-  ./gradlew clean build
+  ./gradlew clean build bootjar
   ```
-3. Clone the Repository
+3. Run docker compose
   ```sh
   docker-compose up --build
   ```    
